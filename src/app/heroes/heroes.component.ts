@@ -17,7 +17,8 @@ export class HeroesComponent implements OnInit {
     username:'fuck',
     gender: '1',
     cityList:['北京', '上海', '广州'],
-    city:'北京'
+    city:'北京',
+    hobby:[]
   }
 
   constructor() { }
