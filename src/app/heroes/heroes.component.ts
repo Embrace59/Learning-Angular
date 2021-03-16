@@ -15,10 +15,21 @@ export class HeroesComponent implements OnInit {
 
   public personInfo:any = {
     username:'fuck',
-    gender: '1',
+    gender: '男',
     cityList:['北京', '上海', '广州'],
-    city:'北京',
-    hobby:[]
+    city:'广州',
+    hobby: [{
+      title: '吃饭',
+      checked: false
+    },
+    {
+      title: '睡觉',
+      checked: true
+    },
+    {
+      title: '玩手机',
+      checked: false
+    }]
   }
 
   constructor() { }

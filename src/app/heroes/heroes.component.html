@@ -16,7 +16,7 @@
     <div>
         <label >
             name:
-            <!--[]是绑定属性，（）是绑定事件-->
+            <!-- []是绑定属性，（）是绑定事件 -->
             <input [(ngModel)]="selectedHero.name" placeholder="name"/>
         </label>
     </div>
@@ -30,17 +30,50 @@
         <!-- radio：ngModel绑定 radio里的value-->
         <li>
             Gender: 
-            <input type="radio" value="1" name="sex" id="gender1" [(ngModel)]="personInfo.gender"> Male
-            <input type="radio" value="2" name="sex" id="gender2" [(ngModel)]="personInfo.gender"> Female
+                <!-- <span *ngFor="let item of personInfo.gender">
+                    <input type="radio" value="1" name="sex" id="gender1"  /><label>{{item}}</label>
+                </span> -->
+               
+            <input type="radio" value="男" name="sex" id="gender1" [(ngModel)]="personInfo.gender"> Male
+            <input type="radio" value="女" name="sex" id="gender2" [(ngModel)]="personInfo.gender"> Female
+            <!-- vue版本 
+            <input type="radio" value="1" name="sex" id="gender1" v-model="sex">男 
+            -->
         </li>
 
         <!-- select option: ngModel绑定option里的value-->
         <li>
             City:
             <select name="city" id="city" [(ngModel)]="personInfo.city">
-                <option [value]="item" *ngFor="let item of personInfo.cityList">{{item}}</option>
+                <!-- <option [value]="item" *ngFor="let item of personInfo.cityList">{{item}}</option> -->
+                <option *ngFor="let item of personInfo.cityList">{{item}}</option>
             </select>
             
+        </li>
+        <!-- vue版本
+        <select v-model="city">
+            <option value="北京">北京</option>
+            <option value="上海">上海</option>
+            <option value="广州">广州</option>
+        </select>
+        <h3>{{city}}</h3>
+            let vue = new Vue({
+            el: '#app',
+            data: {
+                city:'北京',
+            },
+            methods: {}
+        })
+        -->
+        
+        <li>
+            hobby:
+            <span *ngFor="let item of personInfo.hobby; let key = index;">
+                <!-- for 属性规定 label 与哪个表单元素绑定。 -->
+                <!-- <label>是专门为<input>元素服务的，为其定义标记。可以提高鼠标用户的用户体检。如果在label 元素内点击文本，就会触发此控件 -->
+                <input type="checkbox" name="" [id]="'check' + key" [(ngModel)]="item.checked"><label [for]="'check' + key">{{item.title}}</label>
+                <!-- <input type="checkbox" [(ngModel)]="item.checked"><label>{{item.title}}</label> -->
+            </span>
         </li>
 
 
