@@ -1,0 +1,53 @@
+<h2>My Heros</h2>
+<ul class="heroes">
+    <!-- The parentheses () around click tell Angular to listen for the <li> element's click event. -->
+    <!--When the user clicks in the <li>, Angular executes the onSelect(hero) expression.-->
+    <li *ngFor="let hero of heroes" 
+        (click)='onSelect(hero)'
+        [class.selected]='hero === selectedHero'>
+        <span class="badge">{{hero.id}}</span>
+        {{hero.name}}
+    </li>
+</ul>
+
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <div>
+        <label >
+            name:
+            <!--[]是绑定属性，（）是绑定事件-->
+            <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+        </label>
+    </div>
+</div>
+
+<div>
+    <ul>
+        <!-- text：ngModel绑定 text里的输入框的内容-->
+        <li>Name: <input type="text" [(ngModel)]="personInfo.username"/></li>
+
+        <!-- radio：ngModel绑定 radio里的value-->
+        <li>
+            Gender: 
+            <input type="radio" value="1" name="sex" id="gender1" [(ngModel)]="personInfo.gender"> Male
+            <input type="radio" value="2" name="sex" id="gender2" [(ngModel)]="personInfo.gender"> Female
+        </li>
+
+        <!-- select option: ngModel绑定option里的value-->
+        <li>
+            City:
+            <select name="city" id="city" [(ngModel)]="personInfo.city">
+                <option [value]="item" *ngFor="let item of personInfo.cityList">{{item}}</option>
+            </select>
+            
+        </li>
+
+
+        <button (click)="doSubmit()">Get Name</button>
+    </ul>
+    <pre>
+        {{personInfo | json}}
+    </pre>
+</div>
+
