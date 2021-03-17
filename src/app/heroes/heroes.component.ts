@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
+// import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -10,7 +12,8 @@ import { HEROES } from '../mock-heroes';
 
 export class HeroesComponent implements OnInit {
 
-  heroes = HEROES
+  // heroes = HEROES
+  heroes!: Hero[];
   selectedHero!:Hero
 
   public personInfo:any = {
@@ -32,15 +35,23 @@ export class HeroesComponent implements OnInit {
     }]
   }
 
-  constructor() { }
+  //1. 声明了一个私有 heroService 属性，
+  //2. 把它标记为一个 HeroService 的注入点。
+  //当 Angular 创建 HeroesComponent 时，依赖注入系统就会把这个 heroService 参数设置为 HeroService 的单例对象。
+  constructor(private heroService: HeroService) { }
 
   //The ngOnInit() is a lifecycle hook. Angular calls ngOnInit() shortly after creating a component. 
   //It's a good place to put initialization logic.
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getHeroes();
   }
 
   onSelect(hero:Hero): void{
     this.selectedHero = hero
+  }
+
+  getHeroes(): void {
+    this.heroes = this.heroService.getHeroes();
   }
 
   doSubmit(){
